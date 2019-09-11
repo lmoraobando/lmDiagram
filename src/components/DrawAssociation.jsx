@@ -17,12 +17,8 @@ class DrawAssociation extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.state.Association = nextProps.AssociationModel;
-
-        
+        this.setState({Association:nextProps.AssociationModel});
         this.createAssociate(this.state.Association);
-        
-
     }
 
     componentWillMount() {

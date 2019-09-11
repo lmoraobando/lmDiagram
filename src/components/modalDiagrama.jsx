@@ -1,7 +1,6 @@
 ﻿import React from 'react';
 import Model from './Model'
 import Association from './AssociationModel.jsx';
-import ModelController from './DrawAssociation';
 import DrawComponent from './DrawComponent';
 import ControllerLM from './ControllerLM';
 
@@ -28,6 +27,9 @@ class ModalDiagrama extends React.Component {
         //const model1 = new Model("Orden Compra: " + data.Orden_Id, "Estado: " + data.Estado);
         //model1.setPosition(24, 33);
 
+        const model1 = new Model("Model", "Body1");
+        model1.setPosition(219, 250);
+
         const model2 = new Model("Consolidacion", "Body2");
         model2.setPosition(219, 179);
  
@@ -36,14 +38,14 @@ class ModalDiagrama extends React.Component {
 
 
         const association = new Association();
-        //association.setLink(model1, model1);
+        association.setLink(model1, model2);
         association.setLink(model2, model3);
 
         const controllerLM = new ControllerLM();
         controllerLM.setAssociations(association);
 
         this.state.Diagram = controllerLM;
-
+        //this.setState({Diagram:controllerLM});
 
     }
 
