@@ -9,19 +9,14 @@ class DrawComponent extends React.Component {
 
 
         super(props);
-       // AutoBind(this);
-
         this.state = {
             models: []
 
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({ models: nextProps.association.BuildDiagram.listModels });
-
-       
     }
      
 
