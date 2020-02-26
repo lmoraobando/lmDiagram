@@ -22,10 +22,7 @@ class DrawAssociation extends React.Component {
     }
 
     componentDidMount() {
-        this.state.Association = this.props.AssociationModel;
-        this.createAssociate(this.state.Association); 
-
-
+        this.setState({Association:this.props.AssociationModel},this.createAssociate(this.props.AssociationModel));
     }
 
 
@@ -37,12 +34,11 @@ class DrawAssociation extends React.Component {
         let y = [];
         let i = 0;
         let idLine = 0;
-        let modelMultipleLink = [];
+        
         for (var AsocModel of pAssocModel.AssociationModel) {
             i = 0;
             x = [];//coordenada eje X
             y = [];//Coordenada eje Y
-            let W = 0;// altura centro del elemento
             let line = this.createLine("ulmLine" + idLine);
             AsocModel.line_Associate_id = line.getAttribute("id");
 
@@ -57,7 +53,7 @@ class DrawAssociation extends React.Component {
                 this.dragElement(document.getElementById(AsocModel.from));
                 this.dragElement(document.getElementById(AsocModel.to));
                 let modelElement = document.getElementById(Model.Id);
-                W = modelElement.clientHeight / 2;
+               
 
                 if (i == 0) {
                     if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) == 0) {

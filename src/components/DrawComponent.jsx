@@ -28,14 +28,7 @@ class DrawComponent extends React.Component {
 
 
     render() {
-
-        
-        //if (this.props.association.BuildDiagram) {
-          const pListModel = this.props.association.BuildDiagram.listModels;
-        //}
-         
-        /*const useTag = `<svg id="lmDiagramSvg"  width="550" height="300"></svg>`;*/
-        //const Model = React.createClass({ esto esta obsoleto, desaparece en la version  16 
+        const pListModel = this.props.association.BuildDiagram.listModels;
         class Model extends React.Component {
         
             render() {
