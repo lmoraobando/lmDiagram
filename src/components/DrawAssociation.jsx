@@ -5,8 +5,6 @@
 class DrawAssociation extends React.Component {
     constructor(props) {
         super(props);
-       // AutoBind(this);
-
         this.state = {
             Association: [],
             componentModel: [],
@@ -91,11 +89,7 @@ class DrawAssociation extends React.Component {
             idLine++;
         }
 
-        this.state.Association = pAssocModel;
-
-
-
-
+        this.setState({Association:pAssocModel});
 
     }
 
