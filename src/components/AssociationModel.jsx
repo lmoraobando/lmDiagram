@@ -21,7 +21,7 @@ class AssociationModel {
         let pairs = [];
         for (var item of arguments) {
             
-            if (item.Id == 0) {
+            if (item.Id === 0) {
                 item.Id = `lm${CountId}`;
                 pairs[i] = item;
                 this.listModels[this.listModels.length] = item

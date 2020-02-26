@@ -28,13 +28,13 @@ class ModalDiagrama extends React.Component {
         //model1.setPosition(24, 33);
 
         const model1 = new Model("Model", "Body1");
-        model1.setPosition(219, 250);
+        model1.setPosition(219, 150);
 
-        const model2 = new Model("Consolidacion", "Body2");
-        model2.setPosition(219, 179);
+        const model2 = new Model("Model 1", "Body2");
+        model2.setPosition(200, 450);
  
-        const model3 = new Model("Consolidacion", "Body3"); 
-        model3.setPosition(365, 46);
+        const model3 = new Model("Model 2", "Body3"); 
+        model3.setPosition(200, 800);
 
 
         const association = new Association();
@@ -44,8 +44,8 @@ class ModalDiagrama extends React.Component {
         const controllerLM = new ControllerLM();
         controllerLM.setAssociations(association);
 
-        this.state.Diagram = controllerLM;
-        //this.setState({Diagram:controllerLM});
+        
+        this.setState({Diagram:controllerLM});
 
     }
 
