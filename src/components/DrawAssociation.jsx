@@ -5,8 +5,6 @@
 class DrawAssociation extends React.Component {
     constructor(props) {
         super(props);
-       // AutoBind(this);
-
         this.state = {
             Association: [],
             componentModel: [],
@@ -17,25 +15,12 @@ class DrawAssociation extends React.Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        this.state.Association = nextProps.AssociationModel;
-
-        
+        this.setState({Association:nextProps.AssociationModel});
         this.createAssociate(this.state.Association);
-        
-
-    }
-
-    componentWillMount() {
-       // this.state.Association = this.props.AssociationModel;
-        
-
     }
 
     componentDidMount() {
-        this.state.Association = this.props.AssociationModel;
-        this.createAssociate(this.state.Association); 
-
-
+        this.setState({Association:this.props.AssociationModel},this.createAssociate(this.props.AssociationModel));
     }
 
 
@@ -47,30 +32,29 @@ class DrawAssociation extends React.Component {
         let y = [];
         let i = 0;
         let idLine = 0;
-        let modelMultipleLink = [];
+        
         for (var AsocModel of pAssocModel.AssociationModel) {
             i = 0;
             x = [];//coordenada eje X
             y = [];//Coordenada eje Y
-            let W = 0;// altura centro del elemento
             let line = this.createLine("ulmLine" + idLine);
             AsocModel.line_Associate_id = line.getAttribute("id");
 
 
             for (var Model of AsocModel) {
 
-                if (AsocModel.length == 1) {
-                    AsocModel[1] = pAssocModel.listModels.filter(model => model.Id == AsocModel.from)[0];
+                if (AsocModel.length === 1) {
+                    AsocModel[1] = pAssocModel.listModels.filter(model => model.Id === AsocModel.from)[0];
                 };
 
 
                 this.dragElement(document.getElementById(AsocModel.from));
                 this.dragElement(document.getElementById(AsocModel.to));
                 let modelElement = document.getElementById(Model.Id);
-                W = modelElement.clientHeight / 2;
+               
 
-                if (i == 0) {
-                    if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) == 0) {
+                if (i === 0) {
+                    if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) === 0) {
                         x[x.length] = modelElement.offsetLeft + 155 ? modelElement.offsetLeft + 155 : Model.left + 155;// + (Model.left + 27);//225
                         y[y.length] = modelElement.offsetTop ? modelElement.offsetTop : Model.top;   //+ (Model.top + 50);//150
 
@@ -82,7 +66,7 @@ class DrawAssociation extends React.Component {
                     }
                 }
                 else {
-                    if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) == 0) {
+                    if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) === 0) {
                         x[x.length] = modelElement.offsetLeft ? modelElement.offsetLeft  : Model.left; //+ (div2.offsetWidth); 
                         y[y.length] = modelElement.offsetTop ? modelElement.offsetTop + 65 : Model.top+65;    //+ (div2.offsetHeight); 265
 
@@ -105,11 +89,7 @@ class DrawAssociation extends React.Component {
             idLine++;
         }
 
-        this.state.Association = pAssocModel;
-
-
-
-
+        this.setState({Association:pAssocModel});
 
     }
 
@@ -193,23 +173,28 @@ class DrawAssociation extends React.Component {
 
     updateConection(pAssocModel, ModelId) { 
         let postline;
+        let x1 = 0
+        let y1 = 0
+        let x2 = 0
+        let y2 = 0
+
         for (var lineItem of pAssocModel.AssociationModel) {
             let Model1 = document.getElementById(lineItem.from);
             let Model2 = document.getElementById(lineItem.to);
 
             //var rect = Model1.getBoundingClientRect();
             //console.log(rect.top, rect.right, rect.bottom, rect.left);
-            if (parseInt(lineItem.line_Associate_id.substring(7, lineItem.line_Associate_id.length)) == 0) {
-                var x1 = Model1.offsetLeft+155//+ (Model1.offsetWidth);
-                var y1 = Model1.offsetTop //+ (Model1.offsetHeight);
-                var x2 = Model2.offsetLeft//+ (div2.offsetWidth);
-                var y2 = Model2.offsetTop +65//+ (div2.offsetHeight);
+            if (parseInt(lineItem.line_Associate_id.substring(7, lineItem.line_Associate_id.length)) === 0) {
+                 x1 = Model1.offsetLeft+155//+ (Model1.offsetWidth);
+                 y1 = Model1.offsetTop //+ (Model1.offsetHeight);
+                 x2 = Model2.offsetLeft//+ (div2.offsetWidth);
+                 y2 = Model2.offsetTop +65//+ (div2.offsetHeight);
             }
             else {
-                var x1 = Model1.offsetLeft+156//+ (Model1.offsetWidth);
-                var y1 = Model1.offsetTop +65//+ (Model1.offsetHeight);
-                var x2 = Model2.offsetLeft//+ (div2.offsetWidth);
-                var y2 = Model2.offsetTop//+ (div2.offsetHeight);
+                 x1 = Model1.offsetLeft+156//+ (Model1.offsetWidth);
+                 y1 = Model1.offsetTop +65//+ (Model1.offsetHeight);
+                 x2 = Model2.offsetLeft//+ (div2.offsetWidth);
+                 y2 = Model2.offsetTop//+ (div2.offsetHeight);
             }
            
 
@@ -230,25 +215,10 @@ class DrawAssociation extends React.Component {
 
 
 
-
-
-
-
-
     render() {
-
-        const pListModel = this.state.Association.listModels;
-
-
-
-
 
         return (
             <div>
-
-
-                
-
             </div>
         );
     }

@@ -9,33 +9,21 @@ class DrawComponent extends React.Component {
 
 
         super(props);
-       // AutoBind(this);
-
         this.state = {
             models: []
 
         }
     }
 
-    componentWillReceiveProps(nextProps) {
-
+    UNSAFE_componentWillReceiveProps(nextProps) {
         this.setState({ models: nextProps.association.BuildDiagram.listModels });
-
-       
     }
      
 
 
 
     render() {
-
-        
-        //if (this.props.association.BuildDiagram) {
-          const pListModel = this.props.association.BuildDiagram.listModels;
-        //}
-         
-        /*const useTag = `<svg id="lmDiagramSvg"  width="550" height="300"></svg>`;*/
-        //const Model = React.createClass({ esto esta obsoleto, desaparece en la version  16 
+        const pListModel = this.props.association.BuildDiagram.listModels;
         class Model extends React.Component {
         
             render() {
