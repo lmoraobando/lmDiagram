@@ -96,10 +96,12 @@ class DrawAssociation extends React.Component {
 
     createLine(lineId) {
 
+  
+
         let lmSvgArea = document.getElementById("lmDiagramSvg");//;
         let svgNS = "http://www.w3.org/2000/svg";
         let amElement = document.createElementNS(svgNS, "line");
-        amElement.setAttribute("marker-end", "url(#arrow)");
+        amElement.setAttribute("marker-end", "url(#arrowhead)");
         amElement.setAttribute("class", "line");
         amElement.setAttribute("id", lineId);
         lmSvgArea.appendChild(amElement);
@@ -201,7 +203,7 @@ class DrawAssociation extends React.Component {
             postline = document.getElementById(lineItem.line_Associate_id);
             postline.setAttribute('x1', x1);
             postline.setAttribute('y1', y1);
-            postline.setAttribute('x2', x2);
+            postline.setAttribute('x2', x2-7);
             postline.setAttribute('y2', y2);
 
         }
