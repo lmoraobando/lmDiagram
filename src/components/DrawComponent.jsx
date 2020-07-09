@@ -35,8 +35,8 @@ class DrawComponent extends React.Component {
                                 <path d="M 0 0 L 10 5 L 0 10 z" />
                                 </marker>
                             </defs>
-                            <g fill="none" id='g' stroke="black" stroke-width="2" marker-end="url(#arrowhead)">
-                             
+                            <g fill="none" stroke="black" id="gLines" strokeWidth="2" markerEnd="url(#arrowhead)">
+                               
                             </g>
                     </svg >
                 )
