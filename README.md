@@ -2,6 +2,10 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![Alt Text](https://s7.gifyu.com/images/ezgif.com-video-to-gif8d3dba85cf2bc746.gif)
 
+## Basic Example shown on the gif
+
+![Alt Text](https://s7.gifyu.com/images/image9a6cc7e17af7e0c5.png)
+
 ## Available Scripts
 
 In the project directory, you can run:
