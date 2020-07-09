@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ![Alt Text](https://s7.gifyu.com/images/ezgif.com-video-to-gif8d3dba85cf2bc746.gif)
 
-## A basic example is shown on the gif
+## A basic example shown on the gif
 
 ![Alt Text](https://s7.gifyu.com/images/image9a6cc7e17af7e0c5.png)
 
