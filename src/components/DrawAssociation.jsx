@@ -81,13 +81,26 @@ class DrawAssociation extends React.Component {
 
 
 
-                line.setAttribute('x' + (i + 1), x[i]);
-                line.setAttribute('y' + (i + 1), y[i]);
+                line.setAttribute("d",('M' + (x[i])+","+(y[i]) + " "+"C"+(x[i] - 100)+ "," + (y[i]) + " " +(y[i] - 20)+ "," + (y[i]) + " " +(x[i]) + "," + (y[i])));
+                //line.setAttribute('C' + (i + 1), y[i]);
 
                 i++;
             }
+
             idLine++;
+
+            /*var dStrLeft =
+            "M" +
+            (posnALeft.x      ) + "," + (posnALeft.y) + " " +
+            "C" +
+            (posnALeft.x ) + "," + (posnALeft.y) + " " +
+            (posnBLeft.x - 30) + "," + (posnBLeft.y) + " " +
+            (posnBLeft.x      ) + "," + (posnBLeft.y);*/
+
+
         }
+
+       
 
         this.setState({Association:pAssocModel});
 
@@ -96,13 +109,17 @@ class DrawAssociation extends React.Component {
 
     createLine(lineId) {
 
+  
+
         let lmSvgArea = document.getElementById("lmDiagramSvg");//;
+        const gLines = document.getElementById("gLines");
         let svgNS = "http://www.w3.org/2000/svg";
-        let amElement = document.createElementNS(svgNS, "line");
-        amElement.setAttribute("marker-end", "url(#arrow)");
-        amElement.setAttribute("class", "line");
+        let amElement = document.createElementNS(svgNS, "path");
+        amElement.setAttribute("marker-end", "url(#arrowhead)");
+        amElement.setAttribute("class", "path");
         amElement.setAttribute("id", lineId);
-        lmSvgArea.appendChild(amElement);
+        gLines.appendChild(amElement);
+        lmSvgArea.appendChild(gLines);
 
         return amElement;
        
@@ -199,10 +216,11 @@ class DrawAssociation extends React.Component {
            
 
             postline = document.getElementById(lineItem.line_Associate_id);
-            postline.setAttribute('x1', x1);
+            postline.setAttribute("d",('M' + (x1)+","+(y1) + " "+"C"+(x2 - 100)+ "," + (y1) + " " +(x2)+ "," + (y2) + " " +(x2) + "," + (y2)));
+           /* postline.setAttribute('x1', x1);
             postline.setAttribute('y1', y1);
-            postline.setAttribute('x2', x2);
-            postline.setAttribute('y2', y2);
+            postline.setAttribute('x2', x2-7);
+            postline.setAttribute('y2', y2);*/
 
         }
 
