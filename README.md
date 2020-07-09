@@ -1,6 +1,7 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Alt Text](https://media.giphy.com/media/cJRl0zr71SBccwkyRQ/cJRl0zr71SBccwkyRQ.gif)
+![Alt Text](https://s7.gifyu.com/images/ezgif.com-video-to-gif8d3dba85cf2bc746.gif)
+
 ## Available Scripts
 
 In the project directory, you can run:
