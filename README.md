@@ -1,6 +1,6 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Alt Text](https://i.stack.imgur.com/C8sui.gif)
+![Alt Text](https://gfycat.com/decisiveunknowneft)
 ## Available Scripts
 
 In the project directory, you can run:

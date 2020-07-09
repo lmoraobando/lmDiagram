@@ -39,69 +39,17 @@ class DrawAssociation extends React.Component {
             y = [];//Coordenada eje Y
             let line = this.createLine("ulmLine" + idLine);
             AsocModel.line_Associate_id = line.getAttribute("id");
-
-
-            for (var Model of AsocModel) {
-
-                if (AsocModel.length === 1) {
-                    AsocModel[1] = pAssocModel.listModels.filter(model => model.Id === AsocModel.from)[0];
-                };
-
-
-                this.dragElement(document.getElementById(AsocModel.from));
-                this.dragElement(document.getElementById(AsocModel.to));
-                let modelElement = document.getElementById(Model.Id);
-               
-
-                if (i === 0) {
-                    if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) === 0) {
-                        x[x.length] = modelElement.offsetLeft + 155 ? modelElement.offsetLeft + 155 : Model.left + 155;// + (Model.left + 27);//225
-                        y[y.length] = modelElement.offsetTop ? modelElement.offsetTop : Model.top;   //+ (Model.top + 50);//150
-
-                    }
-                    else {
-                        x[x.length] = modelElement.offsetLeft ? modelElement.offsetLeft : Model.left;// + (Model.left + 27);//225
-                        y[y.length] = modelElement.offsetTop ? modelElement.offsetTop : Model.top;   //+ (Model.top + 50);//150
-
-                    }
-                }
-                else {
-                    if (parseInt(AsocModel.line_Associate_id.substring(7, AsocModel.line_Associate_id.length)) === 0) {
-                        x[x.length] = modelElement.offsetLeft ? modelElement.offsetLeft  : Model.left; //+ (div2.offsetWidth); 
-                        y[y.length] = modelElement.offsetTop ? modelElement.offsetTop + 65 : Model.top+65;    //+ (div2.offsetHeight); 265
-
-                    } 
-                    else {
-                        x[x.length] = modelElement.offsetLeft > 0 ? modelElement.offsetLeft + 156 : Model.left + 156; //+ (div2.offsetWidth); 
-                        y[y.length] = modelElement.offsetTop > 0? modelElement.offsetTop+65 : Model.top +65;    //+ (div2.offsetHeight); 265
-
-                    }
-
-                }
-
-
-
-                line.setAttribute("d",('M' + (x[i])+","+(y[i]) + " "+"C"+(x[i] - 100)+ "," + (y[i]) + " " +(y[i] - 20)+ "," + (y[i]) + " " +(x[i]) + "," + (y[i])));
-                //line.setAttribute('C' + (i + 1), y[i]);
-
-                i++;
-            }
+            this.dragElement(document.getElementById(AsocModel.from));
+            this.dragElement(document.getElementById(AsocModel.to));
 
             idLine++;
 
-            /*var dStrLeft =
-            "M" +
-            (posnALeft.x      ) + "," + (posnALeft.y) + " " +
-            "C" +
-            (posnALeft.x ) + "," + (posnALeft.y) + " " +
-            (posnBLeft.x - 30) + "," + (posnBLeft.y) + " " +
-            (posnBLeft.x      ) + "," + (posnBLeft.y);*/
 
 
         }
 
        
-
+        this.updateConection(pAssocModel)
         this.setState({Association:pAssocModel});
 
     }
@@ -188,7 +136,7 @@ class DrawAssociation extends React.Component {
 
 
 
-    updateConection(pAssocModel, ModelId) { 
+    updateConection(pAssocModel) { 
         let postline;
         let x1 = 0
         let y1 = 0
@@ -199,28 +147,23 @@ class DrawAssociation extends React.Component {
             let Model1 = document.getElementById(lineItem.from);
             let Model2 = document.getElementById(lineItem.to);
 
-            //var rect = Model1.getBoundingClientRect();
-            //console.log(rect.top, rect.right, rect.bottom, rect.left);
             if (parseInt(lineItem.line_Associate_id.substring(7, lineItem.line_Associate_id.length)) === 0) {
-                 x1 = Model1.offsetLeft+155//+ (Model1.offsetWidth);
-                 y1 = Model1.offsetTop //+ (Model1.offsetHeight);
+                 x1 = Model1.offsetLeft//+ (Model1.offsetWidth);
+                 y1 = Model1.offsetTop + (Model1.offsetHeight)/2;
                  x2 = Model2.offsetLeft//+ (div2.offsetWidth);
-                 y2 = Model2.offsetTop +65//+ (div2.offsetHeight);
+                 y2 = Model2.offsetTop + (Model2.offsetHeight)/2;
             }
             else {
-                 x1 = Model1.offsetLeft+156//+ (Model1.offsetWidth);
-                 y1 = Model1.offsetTop +65//+ (Model1.offsetHeight);
+                 x1 = Model1.offsetLeft//+ (Model1.offsetWidth);
+                 y1 = Model1.offsetTop + (Model1.offsetHeight)/2;
                  x2 = Model2.offsetLeft//+ (div2.offsetWidth);
-                 y2 = Model2.offsetTop//+ (div2.offsetHeight);
+                 y2 = Model2.offsetTop+ (Model2.offsetHeight)/2;
             }
            
 
             postline = document.getElementById(lineItem.line_Associate_id);
-            postline.setAttribute("d",('M' + (x1)+","+(y1) + " "+"C"+(x2 - 100)+ "," + (y1) + " " +(x2)+ "," + (y2) + " " +(x2) + "," + (y2)));
-           /* postline.setAttribute('x1', x1);
-            postline.setAttribute('y1', y1);
-            postline.setAttribute('x2', x2-7);
-            postline.setAttribute('y2', y2);*/
+            postline.setAttribute("d",('M' + (x1+150)+","+(y1) + " "+"C"+(x2 - 100)+ "," + (y1) + " " +(x2-20)+ "," + (y2) + " " +(x2-10) + "," + (y2)));
+           
 
         }
 
