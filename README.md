@@ -1,3 +1,5 @@
+![GitHub](https://img.shields.io/github/license/lmoraobando/lmdiagram?color=green)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ![Alt Text](https://s7.gifyu.com/images/ezgif.com-video-to-gif8d3dba85cf2bc746.gif)
