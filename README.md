@@ -1,4 +1,6 @@
 ![GitHub](https://img.shields.io/github/license/lmoraobando/lmdiagram?color=green)
+![GitHub last commit](https://img.shields.io/github/last-commit/lmoraobando/lmdiagram)
+![GitHub top language](https://img.shields.io/github/languages/top/lmoraobando/lmdiagram)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 

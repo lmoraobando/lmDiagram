@@ -1,7 +1,7 @@
 ﻿import React from 'react';
 //import AutoBind from 'react-autobind';
 import DrawAssosiation from './DrawAssociation.jsx';
-
+import Model from './Model.jsx';
 
 
 class DrawComponent extends React.Component {
@@ -24,24 +24,7 @@ class DrawComponent extends React.Component {
 
     render() {
         const pListModel = this.props.association.BuildDiagram.listModels;
-        class Model extends React.Component {
-        
-            render() {
-                return (
-                    <svg className="canvas" id="lmDiagramSvg" xmlns="http://www.w3.org/2000/svg" width={this.props.width} height={this.props.height} aria-labelledby={this.props.iconTitle} >
-                            <defs>
-                                <marker id="arrowhead" viewBox="0 0 10 10" refX="3" refY="5"
-                                    markerWidth="6" markerHeight="6" orient="auto">
-                                <path d="M 0 0 L 10 5 L 0 10 z" />
-                                </marker>
-                            </defs>
-                            <g fill="none" stroke="black" id="gLines" strokeWidth="2" markerEnd="url(#arrowhead)">
-                               
-                            </g>
-                    </svg >
-                )
-            }
-        };
+       
     
 
         return (
@@ -80,7 +63,7 @@ class DrawComponent extends React.Component {
                     </div>
 
                 </div>
-                {/*<div dangerouslySetInnerHTML={{ __html: useTag }} />*/}
+                
                 <div >
                     <Model iconTitle="animatedOffice" width='100%' height='350' />
                 </div>
