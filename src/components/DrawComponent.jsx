@@ -15,7 +15,7 @@ class DrawComponent extends React.Component {
         }
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
+    componentWillReceiveProps(nextProps) {
         this.setState({ models: nextProps.association.BuildDiagram.listModels });
     }
      
