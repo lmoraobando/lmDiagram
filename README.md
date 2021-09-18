@@ -4,11 +4,12 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-![Alt Text](https://s7.gifyu.com/images/ezgif.com-video-to-gif8d3dba85cf2bc746.gif)
+![image](https://user-images.githubusercontent.com/11163835/133908185-0e1d3cc9-fdcf-4e65-b0b5-c30cda81c212.png)
 
 ## A basic example shown on the gif
 
-![Alt Text](https://s7.gifyu.com/images/image9a6cc7e17af7e0c5.png)
+![test](https://user-images.githubusercontent.com/11163835/133908159-bffd8e10-7386-4336-b008-9d7696b5bcee.gif)
+
 
 ## Available Scripts
 
