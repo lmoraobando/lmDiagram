@@ -46,6 +46,11 @@ class Model extends React.Component {
                             markerWidth="6" markerHeight="6" orient="auto">
                         <path d="M 0 0 L 10 5 L 0 10 z" />
                         </marker>
+
+                        <marker id="arrowheadleft" viewBox="0 0 10 10" refX="3" refY="5"
+                            markerWidth="6" markerHeight="6" orient="auto">
+                        <path d="M 0 0 L -10 5 L 0 10 z" />
+                        </marker>
                     </defs>
                     <g fill="none" stroke="black" id="gLines" strokeWidth="2" markerEnd="url(#arrowhead)">
                        

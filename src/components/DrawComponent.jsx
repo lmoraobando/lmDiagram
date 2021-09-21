@@ -28,15 +28,10 @@ class DrawComponent extends React.Component {
     
 
         return (
-
-
             <div>
-
                 <div>
                     <div>
-
                         {
-
                             pListModel.map((model, i) => {
 
                                 return (

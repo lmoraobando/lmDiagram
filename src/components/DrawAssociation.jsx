@@ -26,8 +26,6 @@ class DrawAssociation extends React.Component {
 
     createAssociate(pAssocModel) {
 
-
-
         let x = [];
         let y = [];
         let i = 0;
@@ -36,19 +34,15 @@ class DrawAssociation extends React.Component {
         for (var AsocModel of pAssocModel.AssociationModel) {
             i = 0;
             x = [];//coordenada eje X
-            y = [];//Coordenada eje Y
+            y = [];//coordenada eje Y
             let line = this.createLine("ulmLine" + idLine);
             AsocModel.line_Associate_id = line.getAttribute("id");
             this.dragElement(document.getElementById(AsocModel.from));
             this.dragElement(document.getElementById(AsocModel.to));
 
             idLine++;
-
-
-
         }
 
-       
         this.updateConection(pAssocModel)
         this.setState({Association:pAssocModel});
 
@@ -56,8 +50,6 @@ class DrawAssociation extends React.Component {
 
 
     createLine(lineId) {
-
-  
 
         let lmSvgArea = document.getElementById("lmDiagramSvg");//;
         const gLines = document.getElementById("gLines");
@@ -142,28 +134,39 @@ class DrawAssociation extends React.Component {
         let y1 = 0
         let x2 = 0
         let y2 = 0
+        let arrowOrientation = 0;
 
         for (var lineItem of pAssocModel.AssociationModel) {
             let Model1 = document.getElementById(lineItem.from);
             let Model2 = document.getElementById(lineItem.to);
 
             if (parseInt(lineItem.line_Associate_id.substring(7, lineItem.line_Associate_id.length)) === 0) {
-                 x1 = Model1.offsetLeft//+ (Model1.offsetWidth);
+                 x1 = Model1.offsetLeft;
                  y1 = Model1.offsetTop + (Model1.offsetHeight)/2;
-                 x2 = Model2.offsetLeft//+ (div2.offsetWidth);
+                 if (Model2.offsetLeft<Model1.offsetLeft) {
+                    x2 = Model2.offsetLeft + (Model2.offsetWidth)+10;
+                    arrowOrientation =x2+20
+                 }
+                 else{
+                    x2 = Model2.offsetLeft - 10//+ (div2.offsetWidth);
+                    arrowOrientation =x2-20
+                 }
+                 
                  y2 = Model2.offsetTop + (Model2.offsetHeight)/2;
+
             }
             else {
-                 x1 = Model1.offsetLeft//+ (Model1.offsetWidth);
+                 x1 = Model1.offsetLeft + (Model2.offsetWidth);
                  y1 = Model1.offsetTop + (Model1.offsetHeight)/2;
-                 x2 = Model2.offsetLeft//+ (div2.offsetWidth);
+                 x2 = Model2.offsetLeft - 10//+ (div2.offsetWidth);
                  y2 = Model2.offsetTop+ (Model2.offsetHeight)/2;
+                 arrowOrientation = x2-20
+        
             }
            
 
             postline = document.getElementById(lineItem.line_Associate_id);
-            postline.setAttribute("d",('M' + (x1+150)+","+(y1) + " "+"C"+(x2 - 100)+ "," + (y1) + " " +(x2-20)+ "," + (y2) + " " +(x2-10) + "," + (y2)));
-           
+            postline.setAttribute("d",('M' + (x1)+","+(y1) + " "+"C"+(x2)+ "," + (y1) + " " +(arrowOrientation)+ "," + (y2) + " " +(x2) + "," + (y2)));
 
         }
 

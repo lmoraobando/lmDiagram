@@ -33,7 +33,7 @@ class ModalDiagrama extends React.Component {
 
 
         const association = new Association();
-        association.setLink(model1, model2);
+        association.setLink(model2, model1);
         association.setLink(model2, model3);
 
         const controllerLM = new ControllerLM();
