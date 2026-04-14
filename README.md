@@ -1,79 +1,114 @@
-![GitHub](https://img.shields.io/github/license/lmoraobando/lmdiagram?color=green)
-![GitHub last commit](https://img.shields.io/github/last-commit/lmoraobando/lmdiagram)
-![GitHub top language](https://img.shields.io/github/languages/top/lmoraobando/lmdiagram)
+# lmdiagram
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/lmdiagram.svg)](https://www.npmjs.com/package/lmdiagram)
 
-![image](https://user-images.githubusercontent.com/11163835/133908185-0e1d3cc9-fdcf-4e65-b0b5-c30cda81c212.png)
+Componente React para diagramas con **modelos enlazados** (nodos arrastrables y **asociaciones** con curvas SVG). Incluye API basada en clases de datos (`DiagramModel`, `AssociationModel`, `ControllerLM`) y una UI actualizable con variables CSS.
 
-## A basic example shown on the gif
+**Versión actual:** 0.2.x · React 17+ (peer dependency)
 
-![test](https://user-images.githubusercontent.com/11163835/133908159-bffd8e10-7386-4336-b008-9d7696b5bcee.gif)
+---
 
+## Instalación
 
-## Available Scripts
+```bash
+npm install lmdiagram
+```
 
-In the project directory, you can run:
+Asegúrate de tener React en tu proyecto:
 
-### `npm start`
+```bash
+npm install react react-dom
+```
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Uso rápido
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+```jsx
+import { LMDiagram } from 'lmdiagram';
+import 'lmdiagram/styles.css';
 
-### `npm test`
+export function App() {
+  return <LMDiagram />;
+}
+```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+El componente `LMDiagram` incluye un ejemplo por defecto (tres modelos y dos enlaces). Para un grafo propio, usa `buildDiagram` (idealmente con `useCallback` para no recrear el objeto en cada render).
 
-### `npm run build`
+```jsx
+import { useCallback } from 'react';
+import {
+  LMDiagram,
+  DiagramModel,
+  AssociationModel,
+  ControllerLM,
+} from 'lmdiagram';
+import 'lmdiagram/styles.css';
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+export function App() {
+  const buildDiagram = useCallback(() => {
+    const a = new DiagramModel('Origen', 'Detalle A');
+    a.setPosition(120, 80);
+    const b = new DiagramModel('Destino', 'Detalle B');
+    b.setPosition(120, 280);
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+    const assoc = new AssociationModel();
+    assoc.setLink(a, b, 'Mi etiqueta'); // tercer argumento opcional: texto sobre el trazo
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    const controller = new ControllerLM();
+    controller.setAssociations(assoc);
+    return controller;
+  }, []);
 
-### `npm run eject`
+  return <LMDiagram buildDiagram={buildDiagram} />;
+}
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+## API exportada
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+| Export            | Descripción |
+|-------------------|-------------|
+| `LMDiagram`       | Componente principal. Props: `className`, `buildDiagram` (opcional). |
+| `ModalDiagrama`   | Alias de `LMDiagram` (deprecado). |
+| `DiagramModel`    | Nodo: `header`, `body`, `setPosition(top, left)`, `width`, `height`, etc. |
+| `AssociationModel` | `setLink(modeloA, modeloB, etiquetaOpcional)` — enlaces y etiqueta en SVG. |
+| `ControllerLM`    | `setAssociations(association)` — contenedor que usa el diagrama. |
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## Estados y estilos
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+Los estilos viven en `lmdiagram/styles.css`. Puedes personalizar el aspecto desde un contenedor padre usando variables CSS, por ejemplo:
 
-## Learn More
+```css
+.mi-contenedor {
+  --lm-header: linear-gradient(135deg, #0d9488, #14b8a6);
+  --lm-line: #0d9488;
+  --lm-link-label: #115e59;
+  --lm-link-label-stroke: #ffffff;
+}
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Desarrollo en este repositorio
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+| Comando        | Descripción |
+|----------------|-------------|
+| `npm run dev`    | Servidor de desarrollo (demo con Vite). |
+| `npm run build`  | Genera la librería en `dist/` (ESM + CJS + CSS). |
+| `npm run build:demo` | Build estático de la demo en `demo-dist/`. |
+| `npm run preview` | Previsualiza el último build de demo. |
 
-### Code Splitting
+Antes de publicar en npm, `prepublishOnly` ejecuta automáticamente `npm run build`.
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## Publicar en npm
 
-### Analyzing the Bundle Size
+1. `npm login`
+2. `npm version patch` (o `minor` / `major`)
+3. `npm publish`
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+Comprueba que el nombre `lmdiagram` esté libre o usa un nombre con scope, por ejemplo `@tu-usuario/lmdiagram`.
 
-### Making a Progressive Web App
+## Licencia
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
+MIT
 
-### Advanced Configuration
+---
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+*Capturas o GIF antiguos del proyecto pueden aparecer en issues; la demo actual se ejecuta con `npm run dev`.*
