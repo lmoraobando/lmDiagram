@@ -1,6 +1,6 @@
 {
   "name": "lmdiagram",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "React diagram component for linked models and associations",
   "type": "module",
   "main": "./dist/index.cjs",
