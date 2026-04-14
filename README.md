@@ -8,6 +8,7 @@ React component for **linked-model** diagrams (draggable nodes and **association
 **Current version:** 0.2.x · React 17+ (peer dependency)
 
 ---
+<img width="1035" height="507" alt="image" src="https://github.com/user-attachments/assets/1e255ae6-76f0-4aaa-9cca-6601ec7d47d9" />
 
 ## Installation
 
@@ -111,4 +112,3 @@ MIT
 
 ---
 
-*Older screenshots or GIFs may appear in issues; run the current demo with `npm run dev`.*
