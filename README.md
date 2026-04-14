@@ -96,16 +96,6 @@ Styles ship with `lmdiagram/styles.css`. Customize from a parent container using
 | `npm run build:demo` | Static demo build to `demo-dist/`. |
 | `npm run preview` | Preview the last demo build. |
 
-Before publishing, `prepublishOnly` runs `npm run build` automatically.
-
-## Publishing to npm
-
-1. `npm login`
-2. `npm version patch` (or `minor` / `major`)
-3. `npm publish`
-
-Confirm the name `lmdiagram` is available, or use a scoped name such as `@your-username/lmdiagram`.
-
 ## License
 
 MIT
