@@ -3,25 +3,25 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 [![npm version](https://img.shields.io/npm/v/lmdiagram.svg)](https://www.npmjs.com/package/lmdiagram)
 
-Componente React para diagramas con **modelos enlazados** (nodos arrastrables y **asociaciones** con curvas SVG). Incluye API basada en clases de datos (`DiagramModel`, `AssociationModel`, `ControllerLM`) y una UI actualizable con variables CSS.
+React component for **linked-model** diagrams (draggable nodes and **associations** drawn as SVG curves). It exposes a small data-model API (`DiagramModel`, `AssociationModel`, `ControllerLM`) and a themeable UI via CSS variables.
 
-**Versión actual:** 0.2.x · React 17+ (peer dependency)
+**Current version:** 0.2.x · React 17+ (peer dependency)
 
 ---
 
-## Instalación
+## Installation
 
 ```bash
 npm install lmdiagram
 ```
 
-Asegúrate de tener React en tu proyecto:
+Make sure React is installed in your app:
 
 ```bash
 npm install react react-dom
 ```
 
-## Uso rápido
+## Quick start
 
 ```jsx
 import { LMDiagram } from 'lmdiagram';
@@ -32,7 +32,7 @@ export function App() {
 }
 ```
 
-El componente `LMDiagram` incluye un ejemplo por defecto (tres modelos y dos enlaces). Para un grafo propio, usa `buildDiagram` (idealmente con `useCallback` para no recrear el objeto en cada render).
+`LMDiagram` ships with a built-in sample (three models and two links). For your own graph, pass `buildDiagram` (ideally wrapped in `useCallback` so the controller is not recreated every render).
 
 ```jsx
 import { useCallback } from 'react';
@@ -46,13 +46,13 @@ import 'lmdiagram/styles.css';
 
 export function App() {
   const buildDiagram = useCallback(() => {
-    const a = new DiagramModel('Origen', 'Detalle A');
+    const a = new DiagramModel('Source', 'Detail A');
     a.setPosition(120, 80);
-    const b = new DiagramModel('Destino', 'Detalle B');
+    const b = new DiagramModel('Target', 'Detail B');
     b.setPosition(120, 280);
 
     const assoc = new AssociationModel();
-    assoc.setLink(a, b, 'Mi etiqueta'); // tercer argumento opcional: texto sobre el trazo
+    assoc.setLink(a, b, 'My label'); // optional third argument: label along the path
 
     const controller = new ControllerLM();
     controller.setAssociations(assoc);
@@ -63,22 +63,22 @@ export function App() {
 }
 ```
 
-## API exportada
+## Exports
 
-| Export            | Descripción |
-|-------------------|-------------|
-| `LMDiagram`       | Componente principal. Props: `className`, `buildDiagram` (opcional). |
-| `ModalDiagrama`   | Alias de `LMDiagram` (deprecado). |
-| `DiagramModel`    | Nodo: `header`, `body`, `setPosition(top, left)`, `width`, `height`, etc. |
-| `AssociationModel` | `setLink(modeloA, modeloB, etiquetaOpcional)` — enlaces y etiqueta en SVG. |
-| `ControllerLM`    | `setAssociations(association)` — contenedor que usa el diagrama. |
+| Export | Description |
+|--------|-------------|
+| `LMDiagram` | Main component. Props: `className`, optional `buildDiagram`. |
+| `ModalDiagrama` | Alias for `LMDiagram` (deprecated). |
+| `DiagramModel` | Node: `header`, `body`, `setPosition(top, left)`, `width`, `height`, etc. |
+| `AssociationModel` | `setLink(modelA, modelB, optionalLabel)` — links and optional SVG label. |
+| `ControllerLM` | `setAssociations(association)` — wrapper consumed by the diagram. |
 
-## Estados y estilos
+## Styling
 
-Los estilos viven en `lmdiagram/styles.css`. Puedes personalizar el aspecto desde un contenedor padre usando variables CSS, por ejemplo:
+Styles ship with `lmdiagram/styles.css`. Customize from a parent container using CSS variables, for example:
 
 ```css
-.mi-contenedor {
+.my-wrapper {
   --lm-header: linear-gradient(135deg, #0d9488, #14b8a6);
   --lm-line: #0d9488;
   --lm-link-label: #115e59;
@@ -86,29 +86,29 @@ Los estilos viven en `lmdiagram/styles.css`. Puedes personalizar el aspecto desd
 }
 ```
 
-## Desarrollo en este repositorio
+## Developing this repo
 
-| Comando        | Descripción |
-|----------------|-------------|
-| `npm run dev`    | Servidor de desarrollo (demo con Vite). |
-| `npm run build`  | Genera la librería en `dist/` (ESM + CJS + CSS). |
-| `npm run build:demo` | Build estático de la demo en `demo-dist/`. |
-| `npm run preview` | Previsualiza el último build de demo. |
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server (Vite demo). |
+| `npm run build` | Build the library to `dist/` (ESM + CJS + CSS). |
+| `npm run build:demo` | Static demo build to `demo-dist/`. |
+| `npm run preview` | Preview the last demo build. |
 
-Antes de publicar en npm, `prepublishOnly` ejecuta automáticamente `npm run build`.
+Before publishing, `prepublishOnly` runs `npm run build` automatically.
 
-## Publicar en npm
+## Publishing to npm
 
 1. `npm login`
-2. `npm version patch` (o `minor` / `major`)
+2. `npm version patch` (or `minor` / `major`)
 3. `npm publish`
 
-Comprueba que el nombre `lmdiagram` esté libre o usa un nombre con scope, por ejemplo `@tu-usuario/lmdiagram`.
+Confirm the name `lmdiagram` is available, or use a scoped name such as `@your-username/lmdiagram`.
 
-## Licencia
+## License
 
 MIT
 
 ---
 
-*Capturas o GIF antiguos del proyecto pueden aparecer en issues; la demo actual se ejecuta con `npm run dev`.*
+*Older screenshots or GIFs may appear in issues; run the current demo with `npm run dev`.*
