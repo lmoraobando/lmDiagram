@@ -1,111 +1,153 @@
-.arrow {
-    stroke: rgb(0,0,0);
-    stroke-width: 2;
-    marker-end: url(#markerArrow)
+/* LM Diagram — library styles (override via CSS variables on .lm-diagram-root) */
+.lm-diagram-root {
+  --lm-surface: #ffffff;
+  --lm-surface-muted: #f8fafc;
+  --lm-border: #e2e8f0;
+  --lm-header: linear-gradient(135deg, #4f46e5 0%, #6366f1 55%, #818cf8 100%);
+  --lm-text: #0f172a;
+  --lm-text-muted: #64748b;
+  --lm-line: #6366f1;
+  --lm-arrow: #6366f1;
+  --lm-shadow: 0 10px 15px -3px rgb(15 23 42 / 0.08), 0 4px 6px -4px rgb(15 23 42 / 0.06);
+  --lm-radius: 12px;
+  --lm-font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  font-family: var(--lm-font);
+  color: var(--lm-text);
+  box-sizing: border-box;
 }
 
-.line {
-    stroke-width: 2px;
-    stroke: #3c8dbc;
+.lm-diagram-root *,
+.lm-diagram-root *::before,
+.lm-diagram-root *::after {
+  box-sizing: border-box;
 }
 
-#svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
+.lm-diagram-canvas {
+  position: relative;
+  width: 100%;
+  min-height: 360px;
+  background: var(--lm-surface-muted);
+  border-radius: var(--lm-radius);
+  border: 1px solid var(--lm-border);
+  overflow: hidden;
 }
 
-.flowchart-operator {
-    position: absolute;
-    width: 140px;
-    border: 1px solid #CCCCCC;
-    background: #FAFAFA;
-    pointer-events: initial;
-    border: 1px solid #3c8dbc;
-    height: 100px;
+.lm-diagram-nodes {
+  position: relative;
+  min-height: 320px;
 }
 
-.flowchart-operator-title {
-    width: 100%;
-    padding: 5px;
-    font-weight: bold;
-    box-sizing: border-box;
-    border-bottom: 1px solid #DDDDDD;
-    background: #6997b2;
-    height: 30px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    cursor: move;
-    color: white;
+.lm-diagram-node {
+  position: absolute;
+  /* No usar bottom/right junto con top: estira el nodo en el eje vertical u horizontal */
+  bottom: auto;
+  right: auto;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  background: var(--lm-surface);
+  border: 1px solid var(--lm-border);
+  box-shadow: var(--lm-shadow);
+  overflow: hidden;
+  cursor: grab;
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
 }
 
-.body-model {
-    top: 60px;
-    left: 40px;
-    width: 140px;
-    right: auto;
-    height: 71px;
-    bottom: auto;
+.lm-diagram-node:active {
+  cursor: grabbing;
 }
 
-
-
-.card {
-    background: #fff;
-    border-radius: 2px;
-    display: inline-block;
-    height: 300px;
-    margin: 1rem;
-    position: relative;
-    width: 300px;
+.lm-diagram-node:hover {
+  box-shadow: 0 20px 25px -5px rgb(15 23 42 / 0.12), 0 8px 10px -6px rgb(15 23 42 / 0.08);
 }
 
-.card-1 {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+.lm-diagram-node__header {
+  padding: 10px 12px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  letter-spacing: 0.02em;
+  color: #fff;
+  background: var(--lm-header);
+  border-bottom: 1px solid rgb(255 255 255 / 0.12);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
 }
 
-    .card-1:hover {
-        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
-    }
-
-.card-2 {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.lm-diagram-node__body {
+  flex: 0 1 auto;
+  padding: 10px 12px;
+  background: var(--lm-surface);
 }
 
-.card-3 {
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+.lm-diagram-node__label {
+  font-size: 0.8125rem;
+  color: var(--lm-text-muted);
+  line-height: 1.4;
+  word-break: break-word;
 }
 
-.card-4 {
-    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+.lm-diagram-svg-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
-.card-5 {
-    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+.lm-diagram-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
 }
 
-#instructions {
-    position: fixed;
-    left: 50%;
-  }
-  #a, #b {
-    color: white;
-    text-align: center;
-    padding: 10px;
-    position: fixed;
-    width: 100px;
-    height: 20px;
-    left: 100px;
-  }
-  #a {
-    background-color: blue;
-    top: 20px;
-  }
-  #b {
-    background-color: red;
-    top: 150px;
-  }
+.lm-diagram-path {
+  stroke: var(--lm-line);
+  fill: none;
+}
+
+.lm-diagram-link-label {
+  font-family: var(--lm-font);
+  font-size: 11px;
+  font-weight: 600;
+  fill: var(--lm-link-label, #4338ca);
+  paint-order: stroke fill;
+  stroke: var(--lm-link-label-stroke, #ffffff);
+  stroke-width: 3px;
+  stroke-linejoin: round;
+  pointer-events: none;
+}
+
+/* Demo app layout */
+.lm-demo {
+  min-height: 100vh;
+  padding: 2rem 1.5rem;
+  background: radial-gradient(1200px 600px at 10% -10%, #e0e7ff 0%, transparent 55%),
+    radial-gradient(900px 500px at 100% 0%, #cffafe 0%, transparent 45%),
+    #f1f5f9;
+}
+
+.lm-demo__card {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1.5rem 1.75rem;
+  background: #fff;
+  border-radius: 16px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 25px 50px -12px rgb(15 23 42 / 0.15);
+}
+
+.lm-demo__title {
+  margin: 0 0 0.35rem;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: #0f172a;
+}
+
+.lm-demo__subtitle {
+  margin: 0 0 1.25rem;
+  font-size: 0.9375rem;
+  color: #64748b;
+}

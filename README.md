@@ -1,76 +1,104 @@
-![GitHub](https://img.shields.io/github/license/lmoraobando/lmdiagram?color=green)
+# lmdiagram
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+[![npm version](https://img.shields.io/npm/v/lmdiagram.svg)](https://www.npmjs.com/package/lmdiagram)
 
-![Alt Text](https://s7.gifyu.com/images/ezgif.com-video-to-gif8d3dba85cf2bc746.gif)
+React component for **linked-model** diagrams (draggable nodes and **associations** drawn as SVG curves). It exposes a small data-model API (`DiagramModel`, `AssociationModel`, `ControllerLM`) and a themeable UI via CSS variables.
 
-## A basic example shown on the gif
+**Current version:** 0.2.x · React 17+ (peer dependency)
 
-![Alt Text](https://s7.gifyu.com/images/image9a6cc7e17af7e0c5.png)
+---
+<img width="1035" height="507" alt="image" src="https://github.com/user-attachments/assets/1e255ae6-76f0-4aaa-9cca-6601ec7d47d9" />
 
-## Available Scripts
+## Installation
 
-In the project directory, you can run:
+```bash
+npm install lmdiagram
+```
 
-### `npm start`
+Make sure React is installed in your app:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+```bash
+npm install react react-dom
+```
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## Quick start
 
-### `npm test`
+```jsx
+import { LMDiagram } from 'lmdiagram';
+import 'lmdiagram/styles.css';
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+export function App() {
+  return <LMDiagram />;
+}
+```
 
-### `npm run build`
+`LMDiagram` ships with a built-in sample (three models and two links). For your own graph, pass `buildDiagram` (ideally wrapped in `useCallback` so the controller is not recreated every render).
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```jsx
+import { useCallback } from 'react';
+import {
+  LMDiagram,
+  DiagramModel,
+  AssociationModel,
+  ControllerLM,
+} from 'lmdiagram';
+import 'lmdiagram/styles.css';
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+export function App() {
+  const buildDiagram = useCallback(() => {
+    const a = new DiagramModel('Source', 'Detail A');
+    a.setPosition(120, 80);
+    const b = new DiagramModel('Target', 'Detail B');
+    b.setPosition(120, 280);
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+    const assoc = new AssociationModel();
+    assoc.setLink(a, b, 'My label'); // optional third argument: label along the path
 
-### `npm run eject`
+    const controller = new ControllerLM();
+    controller.setAssociations(assoc);
+    return controller;
+  }, []);
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+  return <LMDiagram buildDiagram={buildDiagram} />;
+}
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Exports
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+| Export | Description |
+|--------|-------------|
+| `LMDiagram` | Main component. Props: `className`, optional `buildDiagram`. |
+| `ModalDiagrama` | Alias for `LMDiagram` (deprecated). |
+| `DiagramModel` | Node: `header`, `body`, `setPosition(top, left)`, `width`, `height`, etc. |
+| `AssociationModel` | `setLink(modelA, modelB, optionalLabel)` — links and optional SVG label. |
+| `ControllerLM` | `setAssociations(association)` — wrapper consumed by the diagram. |
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+## Styling
 
-## Learn More
+Styles ship with `lmdiagram/styles.css`. Customize from a parent container using CSS variables, for example:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+```css
+.my-wrapper {
+  --lm-header: linear-gradient(135deg, #0d9488, #14b8a6);
+  --lm-line: #0d9488;
+  --lm-link-label: #115e59;
+  --lm-link-label-stroke: #ffffff;
+}
+```
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## Developing this repo
 
-### Code Splitting
+| Command | Description |
+|---------|-------------|
+| `npm run dev` | Dev server (Vite demo). |
+| `npm run build` | Build the library to `dist/` (ESM + CJS + CSS). |
+| `npm run build:demo` | Static demo build to `demo-dist/`. |
+| `npm run preview` | Preview the last demo build. |
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
+## License
 
-### Analyzing the Bundle Size
+MIT
 
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
+---
 
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
